@@ -10,6 +10,7 @@ project(object_detection)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  tf
   ros_numpy
   object_detection_msgs
 )
@@ -34,7 +35,7 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES object_detection
-CATKIN_DEPENDS message_runtime
+CATKIN_DEPENDS message_runtime tf
 #  DEPENDS system_lib
 )
 
@@ -89,6 +90,24 @@ include_directories(
 file(GLOB python_scripts_DIR
     "src/*.py"
 )
+
+file(GLOB_RECURSE PROGRAM_SOURCES RELATIVE ${PROJECT_SOURCE_DIR}
+  "src/*.cpp"
+)
+
+add_executable(object_process_node
+  ${PROGRAM_SOURCES}
+)
+
+add_dependencies(object_process_node
+  ${catkin_EXPORTED_TARGETS}
+)
+
+target_link_libraries(object_process_node
+    ${catkin_LIBRARIES}
+)
+
+
 
 install(DIRECTORY launch
     DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})

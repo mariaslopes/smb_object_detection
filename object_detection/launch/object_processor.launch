@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="object_detection" type="object_process_node" name="object_process_node" output="screen">
+    <rosparam command="load" file="$(find object_detection)/cfg/object_processor.yaml" />
+  </node>
+</launch>

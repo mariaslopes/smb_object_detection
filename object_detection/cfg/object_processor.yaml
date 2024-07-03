@@ -1,2 +1,3 @@
 object_processor:
-  base_frame: /odom
+  base_frame: world_graph_msf
+  csv_path: /workspaces/rss_workspace/src/object_detection/object_detection/data/output.csv
